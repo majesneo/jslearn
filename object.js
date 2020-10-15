@@ -84,3 +84,6 @@ let accum = new Accumulator(2);
 accum.read();
 console.log(accum.value);
 
+a = 1
+console.log(Object.is(NaN, NaN));
+
