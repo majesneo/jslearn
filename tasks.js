@@ -124,6 +124,178 @@ let arr = [5, 3, 8, 1];
 
 let filtered = filterRange2(arr, 1, 4);
 console.log(filtered);
+console.log(arr);
+
+
+let arr = [5, 3, 8, 1];
+let filterRangeInPlace = (arr, a, b) => {
+    for (let i = 0; i < arr.length; i++) {
+        if (a <= arr[i] && b <= arr[i]) {
+            console.log(arr[i]);
+            arr.splice(i, 1);
+        }
+    }
+}
+console.log(filterRangeInPlace(arr, 1, 4));
+console.log(arr);
+
+let arr = [5, 2, 1, -10, 8];
+
+arr.sort((a, b) => b - a);
+console.log(arr);
+
+[1, -2, 15, 2, 0, 8].sort(function (a, b) {
+    console.log(a + " <> " + b);
+});
+
+
+let arr = ["HTML", "JavaScript", "CSS"];
+let copySorted = (arr) => {
+    let sorted = arr.slice(0);
+    console.log(sorted);
+    let string = String(sorted.sort());
+    console.log(string);
+}
+copySorted(arr);
+console.log(arr);
+
+
+function Calculator() {
+    this.calculate = (str) => {
+        this.str = str;
+        console.log(a = +this.str.slice(0, 1));
+        console.log(a);
+        console.log(b = +this.str.slice(-1));
+        console.log((this.operator = this.str.slice(1, 4)));
+        switch (this.operator) {
+            case " + ":
+                return a + b
+            default:
+                return ("Input Error")
+        }
+    }
+    this.addMethod = (name, func) => {
+        this.operator = func;
+        this.str = name;
+        console.log(this.operator);
+        console.log(this.str);
+        switch (name) {
+            case " * ":
+                return a * b
+            default:
+                return ("Input Error");
+        }
+    }
+}
+let calc = new Calculator;
+console.log(calc.calculate("4 + 5"));
 
 
 
+function Calculator() {
+
+    this.methods = {
+        "-": (a, b) => a - b,
+        "+": (a, b) => a + b
+    };
+
+    this.calculate = function (str) {
+
+        let split = str.split(' '),
+            a = +split[0],
+            op = split[1],
+            b = +split[2]
+
+        if (!this.methods[op] || isNaN(a) || isNaN(b)) {
+            return NaN;
+        }
+
+        return this.methods[op](a, b);
+    }
+
+    this.addMethod = function (name, func) {
+        this.methods[name] = func;
+    };
+}
+let calc = new Calculator;
+console.log(calc.calculate("4 + 9"));
+let powerCalc = new Calculator;
+console.log(powerCalc.addMethod("*", (a, b) => a * b));
+powerCalc.addMethod("**", (a, b) => a ** b);
+powerCalc.addMethod("*", (a, b) => a * b);
+powerCalc.addMethod("/", (a, b) => a / b);
+let result = powerCalc.calculate("2 ** 3");
+let result2 = powerCalc.calculate("2 * 3");
+console.log(result);
+console.log(result2);
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let users = [vasya, petya, masha];
+console.log(users.map(user => user.name ? user.name : ""));
+
+
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users = [vasya, petya, masha];
+
+let usersMapped = [
+]
+console.log(usersMapped = users.map(user => ({ fullName: user.name + " " + user.surname, id: user.id })));
+console.log(usersMapped);
+
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let arr = [vasya, petya, masha];
+
+let sortByAge = (arr) => {
+    console.log(arr.sort((a, b) => a.age - b.age));
+}
+sortByAge(arr);
+console.log(arr);
+
+let arr = [1, 2, 3];
+
+let shuffle = (arr) => {
+    return arr.sort(() => Math.random() - 0.5);
+
+}
+console.log(shuffle(arr));
+console.log(shuffle(arr));
+console.log(shuffle(arr));
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 29 };
+
+let arr = [vasya, petya, masha];
+
+let getAverageAge = (arr) => {
+    console.log(arr.reduce((sum, item) => sum + item.age, 0));
+}
+
+getAverageAge(arr);
+
+
+
+let strings = ["кришна", "кришна", "харе", "харе",
+    "харе", "харе", "кришна", "кришна", ":-O"
+];
+function unique(arr) {
+    let result = [];
+    for (let str of arr) {
+        if (!result.includes(str)) {
+            result.push(str);
+        }
+    }
+
+    return result;
+}
+console.log(unique(strings));
