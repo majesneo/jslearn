@@ -121,7 +121,6 @@ function filterRange2(arr, a, b) {
 }
 
 let arr = [5, 3, 8, 1];
-
 let filtered = filterRange2(arr, 1, 4);
 console.log(filtered);
 console.log(arr);
@@ -299,3 +298,184 @@ function unique(arr) {
     return result;
 }
 console.log(unique(strings));
+
+
+
+let values = ["Hare", "Krishna", "Hare", "Krishna",
+    "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+let unique = (values) => {
+    let set = new Set(values);
+    return set
+}
+console.log(unique(values));
+
+
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+function aclean(arr) {
+    let map = new Map();
+    for (let word of arr) {
+
+        // разбиваем слово на буквы, сортируем и объединяем снова в строку
+        let sorted = word.toLowerCase().split("").sort().join("");
+        console.log(sorted);
+        console.log(map.set(sorted, word));
+        console.log(map);
+    }
+    return Array.from(map.values());
+}
+
+console.log((aclean(arr)));
+
+let map = new Map();
+map.set("name", "John");
+console.log(map);
+let keys = map.keys();
+console.log(map.keys());
+console.log(keys);
+let newArry = Array.from(keys);
+newArry.push("more");
+console.log(newArry);
+
+
+
+let read = new WeakSet();
+let messages = [
+    { text: "Hello", from: "John" },
+    { text: "How goes?", from: "John" },
+    { text: "See you soon", from: "Alice" }
+];
+read.add(messages);
+console.log(read);
+console.log(read.has(messages));
+messages = null;
+console.log(read.has(messages));
+
+let messages = [
+    { text: "Hello", from: "John" },
+    { text: "How goes?", from: "John" },
+    { text: "See you soon", from: "Alice" }
+];
+let readMap = new WeakMap();
+readMap.set(messages[0], new Date(2017, 1, 1));
+
+let salaries = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+};
+let sumSalaries = (obj) => {
+    let summ = 0;
+    if (obj) {
+        for (let item of Object.values(obj)) {
+            summ += item;
+        }
+        return summ
+    }
+    return 0
+}
+console.log(sumSalaries(salaries));
+
+
+function sumSalaries2(salaries) {
+    return Object.values(salaries).reduce((a, b) => a + b, 0)
+}
+console.log(sumSalaries2(salaries));
+
+let user = {
+    name: 'John',
+    age: 30
+};
+
+let count = (obj) => {
+    let summProp = 0;
+    for (let item in obj) {
+        if (item) {
+            summProp += 1
+        }
+    }
+    return summProp
+}
+console.log(count(user));
+
+function count2(obj) {
+    return Object.keys(obj).length;
+}
+console.log(count2(user));
+let [firstName, surname] = "Ilya Kantor".split(' ');
+console.log(firstName);
+console.log(surname);
+
+let user = {
+    name: "John",
+    age: 30
+};
+for (let [key, value] of Object.entries(user)) {
+    console.log(`${key}:${value}`);
+}
+
+
+// console.log(Object.entries(user));
+let title, width, height;
+
+// ошибка будет в этой строке
+({ title, width, height } = { title: "Menu", width: 200, height: 100 });
+
+let user = {
+    name: "John",
+    years: 30
+};
+
+let { name, years: age, isAdmin = false } = user;
+console.log(name);
+console.log(age);
+console.log(isAdmin);
+
+let salaries = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+};
+
+let topSalary = (salaries) => {
+    let maxValue = 0;
+    let name;
+    console.log();
+    for (let [item, value] of Object.entries(salaries)) {
+        console.log(value);
+        console.log(item);
+        if (maxValue < value) {
+            maxValue = value;
+            name = item;
+        }
+    }
+    return name
+}
+console.log(topSalary(salaries));
+
+let user = {
+    name: "Василий Иванович",
+    age: 35
+};
+
+let json = JSON.stringify(user);
+console.log(json);
+
+console.log(JSON.parse(json));
+
+let room = {
+    number: 23
+};
+
+let meetup = {
+    title: "Совещание",
+    occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
+    place: room
+};
+
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+JSON.stringify(meetup, function replacer(key, value) {
+
+}
