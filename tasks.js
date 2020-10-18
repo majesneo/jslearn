@@ -463,10 +463,10 @@ console.log(json);
 
 console.log(JSON.parse(json));
 
+
 let room = {
     number: 23
 };
-
 let meetup = {
     title: "Совещание",
     occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
@@ -476,6 +476,235 @@ let meetup = {
 room.occupiedBy = meetup;
 meetup.self = meetup;
 
-JSON.stringify(meetup, function replacer(key, value) {
+console.log(
+    JSON.stringify(meetup, function replacer(key, value) {
+        return (key != "" && value == meetup) ? undefined : value;
+    }));
 
+function pow(x, n) {
+    if (n == 1) {
+        return x;
+    } else {
+        return x * pow(x, n - 1);
+    }
 }
+console.log(pow(2, 4));
+
+let company = { // тот же самый объект, сжатый для краткости
+    sales: [{ name: 'John', salary: 1000 }, { name: 'Alice', salary: 600 }],
+    development: {
+        sites: [{ name: 'Peter', salary: 2000 }, { name: 'Alex', salary: 1800 }],
+        internals: [{ name: 'Jack', salary: 1300 }]
+    }
+};
+// Функция для подсчёта суммы зарплат
+function sumSalaries(department) {
+    if (Array.isArray(department)) { // случай (1)
+        return department.reduce((prev, current) => prev + current.salary, 0); // сумма элементов массива
+    } else { // случай (2)
+        let sum = 0;
+        for (let subdep of Object.values(department)) {
+            sum += sumSalaries(subdep); // рекурсивно вызывается для подотделов, суммируя результаты
+        }
+        return sum;
+    }
+}
+console.log(sumSalaries(company));
+
+let sumTo = (n) => {
+    let sum = 0;
+    for (; n >= 1; n--) {
+        sum += n;
+    }
+    return sum
+}
+console.log(sumTo(100));
+
+let sumTo = (n) => {
+    if (n == 1) {
+        return n
+    } else {
+        return n + sumTo(n - 1)
+    }
+}
+console.log(sumTo(4));
+
+let sumToArif = (n) => {
+    return n * (n + 1) / 2
+}
+console.log(sumToArif(4));
+
+let factorial = (n) => {
+    if (n == 1) {
+        return n
+    } else {
+        return n * factorial(n - 1)
+    }
+}
+console.log(factorial(4));
+
+let factorial = (n) => {
+    return (n != 1) ? (n * factorial(n - 1)) : 1;
+}
+console.log(factorial(4));
+
+let fib = (n) => {
+    if (n <= 1) {
+        return n
+    } else {
+        return fib(n - 1) + fib(n - 2)
+    }
+}
+console.log(fib(7));
+
+let fib = (n) => {
+    let a = 1;
+    let c;
+    for (let i = 0; i < n; i++) {
+        console.log(a += a);
+    }
+    return
+}
+
+function fib(n) {
+    let a = 1;
+    let b = 1;
+    for (let i = 3; i <= n; i++) {
+        let c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+console.log(fib(7));
+
+
+
+let list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: {
+                value: 4,
+                next: null
+            }
+        }
+    }
+};
+
+let printList = (list) => {
+    while (list) {
+        console.log(list.value);
+        return list = list.next;
+    }
+}
+console.log(printList(list));
+
+let list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: {
+                value: 4,
+                next: null
+            }
+        }
+    }
+};
+
+function printReverseList(list) {
+
+    if (list.next) {
+        printReverseList(list.next);
+    }
+
+    alert(list.value);
+}
+
+printReverseList(list);
+
+let str = "Привет";
+console.log([...str]);
+console.log(Array.from(str));
+
+const a = {
+    name: "Vanya",
+    age: 30,
+    job: "driver",
+};
+
+const b = {
+    ...a,
+    age: 40,
+};
+console.log(b);
+
+let arr = [3, 5, 1];
+console.log(Math.max(...arr));
+
+let name = "John";
+
+function sayHi() {
+    return ("Hi, " + name);
+}
+
+
+let sum = (a) => {
+    return function (b) {
+        return a + b;
+    }
+}
+console.log(sum(1)(2));
+
+let arr2 = [1, 2, 3, 4, 5, 6, 7];
+
+let inBetween = (a, b) => {
+    return function (x) {
+        console.log(x >= a && x <= b);
+        return x >= a && x <= b;
+    };
+}
+console.log(arr2.filter(inBetween(3, 5)));
+
+function inArray(arr) {
+    return function (x) {
+        console.log(arr.includes(x));
+        return arr.includes(x);
+    };
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(arr.filter(inArray([1, 2, 10])));
+
+let users = [
+    { name: "John", age: 20, surname: "Johnson" },
+    { name: "Pete", age: 18, surname: "Peterson" },
+    { name: "Ann", age: 19, surname: "Hathaway" }
+];
+
+let byField = (value) => {
+    if (value == "name") {
+        console.log(users.sort((a, b) => a.name > b.name ? 1 : -1));
+    } else if (value == "age") {
+        users.sort((a, b) => a.age > b.age ? 1 : -1);
+    }
+}
+console.log(users.sort(byField('name')));
+console.log(users.sort(byField('age')));
+
+let users = [
+    { name: "John", age: 20, surname: "Johnson" },
+    { name: "Pete", age: 18, surname: "Peterson" },
+    { name: "Ann", age: 19, surname: "Hathaway" }
+];
+
+function byField(field) {
+    return (a, b) => a[field] > b[field] ? 1 : -1;
+}
+console.log(users.sort(byField('name')));
+
+console.log(users.sort(byField('age')));
