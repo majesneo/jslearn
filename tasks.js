@@ -701,10 +701,99 @@ let users = [
     { name: "Pete", age: 18, surname: "Peterson" },
     { name: "Ann", age: 19, surname: "Hathaway" }
 ];
-
 function byField(field) {
     return (a, b) => a[field] > b[field] ? 1 : -1;
 }
 console.log(users.sort(byField('name')));
-
 console.log(users.sort(byField('age')));
+
+function makeArmy() {
+    let shooters = [];
+    for (let i = 0; i < 10; i++) {
+        let shooter = () => {
+            console.log(i);
+        };
+        shooters.push(shooter);
+        console.log(i);
+    }
+    console.log(shooters)
+    return shooters;
+}
+
+let army = makeArmy();
+army[0]()
+army[5]()
+army[7]()
+
+
+let sayHi = function func(who) {
+    if (who) {
+        console.log((`Hello, ${who}`));
+    } else {
+        func("Guest"); // Теперь всё в порядке
+    }
+};
+
+let welcome = sayHi;
+sayHi = null;
+console.log(sayHi);
+console.log(welcome);
+
+function makeCounter() {
+    function counter(value) {
+        counter.count++;
+        return counter
+    };
+    counter.set = (value) => { return (counter.count = value) };
+    counter.decrease = () => { return counter.count-- }
+    counter.count = 0;
+    return counter;
+}
+
+
+
+function sum(a) {
+
+    let currentSum = a;
+
+    function f(b) {
+        currentSum += b;
+        return f;
+    }
+
+    f.toString = function () {
+        return currentSum;
+    };
+
+    return f;
+}
+console.log(alert(sum(1)(2)));
+Чтобы задать метод преобразования функции в строку.alert(sum(1)(2)) преобразует функцию в строку.Метод.toString позволяет задать способ преобразования: мы возвращаем currentSum в качестве строки.
+
+
+let printNumbers = (a, b) => {
+
+    let time = setInterval(function () {
+        alert(a);
+        if (a == b) {
+            clearTimeout(time);
+        }
+        a++;
+    }, 1000);
+}
+console.log(printNumbers(3, 6));
+
+function printNumbers(from, to) {
+    let current = from;
+
+    setTimeout(function go() {
+        alert(current);
+        if (current < to) {
+            setTimeout(go, 1000);
+        }
+        current++;
+    }, 1000);
+}
+
+
+printNumbers(5, 10);
