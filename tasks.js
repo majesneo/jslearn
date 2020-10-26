@@ -557,26 +557,7 @@ let fib = (n) => {
 }
 console.log(fib(7));
 
-let fib = (n) => {
-    let a = 1;
-    let c;
-    for (let i = 0; i < n; i++) {
-        console.log(a += a);
-    }
-    return
-}
 
-function fib(n) {
-    let a = 1;
-    let b = 1;
-    for (let i = 3; i <= n; i++) {
-        let c = a + b;
-        a = b;
-        b = c;
-    }
-    return b;
-}
-console.log(fib(7));
 
 
 
@@ -795,5 +776,56 @@ function printNumbers(from, to) {
     }, 1000);
 }
 
+let Person = {
+    constructor: function (name, age, gender) {
+        this.name = name
+        this.age = age
+        this.gender = gender
+        return this
+    },
+    greet: function () {
+        return "hi name " + this.name;
+    }
+}
+let person, person2, person3;
+person = Object.create(Person).constructor("alex", 34, "male")
+console.log(person);
+person2 = Object.create(Person).constructor("ksuha", 24, "women")
+console.log(person2);
+console.log(person2.greet());
+console.log(person.greet());
 
-printNumbers(5, 10);
+
+let webDev = Object.create(Person);
+webDev.constructor = function (name, age, gender, skills) {
+    Person.constructor.apply(this, arguments)
+    this.skills = skills
+    return this
+}
+
+let dev = Object.create(webDev).constructor('Nikolas', 52, 'male', 'HTML')
+console.log(dev);
+
+
+Person = function (name) {
+    this.name = name
+};
+let person = new Person("Max")
+console.log(person);
+
+Person.prototype.greet = function () {
+    return "hi " + this.name;
+}
+console.log(person.greet());
+
+Developer = function (name, skills) {
+    Person.apply(this, arguments)
+    this.skills = skills
+}
+Developer.prototype = Object.create(Person.prototype)
+Developer.prototype.constructor = Developer;
+developer = new Developer("Lion", "JavaScript")
+console.log(developer);
+console.log(developer.greet());
+console.log(developer instanceof Developer);
+console.log(developer instanceof Person);
